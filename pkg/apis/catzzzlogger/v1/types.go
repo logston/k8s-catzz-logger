@@ -8,8 +8,8 @@ import (
 // +genclient:noStatus
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// MyResource describes a MyResource resource
-type MyResource struct {
+// CatzzzLogger describes a CatzzzLogger resource
+type CatzzzLogger struct {
 	// TypeMeta is the metadata for the resource, like kind and apiversion
 	meta_v1.TypeMeta `json:",inline"`
 	// ObjectMeta contains the metadata for the particular object, including
@@ -22,24 +22,24 @@ type MyResource struct {
 	meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Spec is the custom resource spec
-	Spec MyResourceSpec `json:"spec"`
+	Spec CatzzzLoggerSpec `json:"spec"`
 }
 
-// MyResourceSpec is the spec for a MyResource resource
-type MyResourceSpec struct {
+// CatzzzLoggerSpec is the spec for a CatzzzLogger resource
+type CatzzzLoggerSpec struct {
 	// Message and SomeValue are example custom spec fields
 	//
 	// this is where you would put your custom resource data
-	Message   string `json:"message"`
-	SomeValue *int32 `json:"someValue"`
+	AsciiCat string `json:"asciiCat"`
+	Count    *int32 `json:"count"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// MyResourceList is a list of MyResource resources
-type MyResourceList struct {
+// CatzzzLoggerList is a list of CatzzzLogger resources
+type CatzzzLoggerList struct {
 	meta_v1.TypeMeta `json:",inline"`
 	meta_v1.ListMeta `json:"metadata"`
 
-	Items []MyResource `json:"items"`
+	Items []CatzzzLogger `json:"items"`
 }

@@ -5,13 +5,13 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	"github.com/trstringer/k8s-controller-custom-resource/pkg/apis/myresource"
+	"github.com/logston/k8s-catzzz-logger/pkg/apis/catzzlogger"
 )
 
 // GroupVersion is the identifier for the API which includes
 // the name of the group and the version of the API
 var SchemeGroupVersion = schema.GroupVersion{
-	Group:   myresource.GroupName,
+	Group:   catzzlogger.GroupName,
 	Version: "v1",
 }
 

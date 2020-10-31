@@ -1,0 +1,7 @@
+apiVersion: paullogston.com/v1
+kind: CatzzzLogger
+metadata:
+  name: example-catzzzlogger
+spec:
+  message: hello world
+  someValue: 13

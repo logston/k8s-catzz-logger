@@ -5,19 +5,19 @@ import (
 	"os/signal"
 	"syscall"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	meta_v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/cache"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/util/workqueue"
 
-	myresourceclientset "github.com/trstringer/k8s-controller-custom-resource/pkg/client/clientset/versioned"
-	myresourceinformer_v1 "github.com/trstringer/k8s-controller-custom-resource/pkg/client/informers/externalversions/myresource/v1"
+	catzzzloggerclientset "github.com/logston/k8s-catzzz-logger/pkg/client/clientset/versioned"
+	catzzzlogger_v1 "github.com/logston/k8s-catzzz-logger/pkg/client/informers/externalversions/catzzzlogger/v1"
 )
 
 // retrieve the Kubernetes cluster client from outside of the cluster
-func getKubernetesClient() (kubernetes.Interface, myresourceclientset.Interface) {
+func getKubernetesClient() (kubernetes.Interface, catzzzloggerclientset.Interface) {
 	// construct the path to resolve to `~/.kube/config`
 	kubeConfigPath := os.Getenv("HOME") + "/.kube/config"
 
@@ -33,7 +33,7 @@ func getKubernetesClient() (kubernetes.Interface, myresourceclientset.Interface)
 		log.Fatalf("getClusterConfig: %v", err)
 	}
 
-	myresourceClient, err := myresourceclientset.NewForConfig(config)
+	myresourceClient, err := catzzzloggerclientset.NewForConfig(config)
 	if err != nil {
 		log.Fatalf("getClusterConfig: %v", err)
 	}
@@ -50,7 +50,7 @@ func main() {
 	// retrieve our custom resource informer which was generated from
 	// the code generator and pass it the custom resource client, specifying
 	// we should be looking through all namespaces for listing and watching
-	informer := myresourceinformer_v1.NewMyResourceInformer(
+	informer := catzzzlogger_v1.NewMyResourceInformer(
 		myresourceClient,
 		meta_v1.NamespaceAll,
 		0,

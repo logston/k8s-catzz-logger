@@ -35,3 +35,8 @@ The breakpoint should be hit and you can analyze in the debugger the object...
 ```
 (dlv) p obj
 ```
+
+
+```
+ROOT_PACKAGE="github.com/logston/k8s-catzzz-logger" CUSTOM_RESOURCE_NAME="catzzzlogger" CUSTOM_RESOURCE_VERSION="v1" ./generate-groups.sh all "$ROOT_PACKAGE/pkg/client" "$ROOT_PACKAGE/pkg/apis" "$CUSTOM_RESOURCE_NAME:$CUSTOM_RESOURCE_VERSION"
+```

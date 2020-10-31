@@ -1,4 +1,4 @@
 // +k8s:deepcopy-gen=package
-// +groupName=trstringer.com
+// +groupName=paullogston.com
 
 package v1
