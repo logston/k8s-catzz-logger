@@ -5,13 +5,13 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	"github.com/logston/k8s-catzzz-logger/pkg/apis/catzzlogger"
+	"github.com/logston/k8s-catzzz-logger/pkg/apis/catzzzlogger"
 )
 
 // GroupVersion is the identifier for the API which includes
 // the name of the group and the version of the API
 var SchemeGroupVersion = schema.GroupVersion{
-	Group:   catzzlogger.GroupName,
+	Group:   catzzzlogger.GroupName,
 	Version: "v1",
 }
 
@@ -28,12 +28,12 @@ func Resource(resource string) schema.GroupResource {
 }
 
 // addKnownTypes adds our types to the API scheme by registering
-// MyResource and MyResourceList
+// CatzzzLogger and CatzzzLoggerList
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(
 		SchemeGroupVersion,
-		&MyResource{},
-		&MyResourceList{},
+		&CatzzzLogger{},
+		&CatzzzLoggerList{},
 	)
 
 	// register the type in the scheme

@@ -50,7 +50,7 @@ func main() {
 	// retrieve our custom resource informer which was generated from
 	// the code generator and pass it the custom resource client, specifying
 	// we should be looking through all namespaces for listing and watching
-	informer := catzzzlogger_v1.NewMyResourceInformer(
+	informer := catzzzlogger_v1.NewCatzzzLoggerInformer(
 		myresourceClient,
 		meta_v1.NamespaceAll,
 		0,
