@@ -57,6 +57,8 @@ func (c *Controller) HasSynced() bool {
 func (c *Controller) runWorker() {
 	log.Info("Controller.runWorker: starting")
 
+	c.handler.Init()
+
 	// invoke processNextItem to fetch and consume the next change
 	// to a watched or listed resource
 	for c.processNextItem() {
@@ -112,7 +114,7 @@ func (c *Controller) processNextItem() bool {
 	}
 
 	// if the item doesn't exist then it was deleted and we need to fire off the handler's
-	// ObjectDeleted method. but if the object does exist that indicates that the object
+	// ObjectDeleted method. But if the object does exist that indicates that the object
 	// was created (or updated) so run the ObjectCreated method
 	//
 	// after both instances, we want to forget the key from the queue, as this indicates

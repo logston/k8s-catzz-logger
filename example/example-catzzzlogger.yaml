@@ -3,5 +3,10 @@ kind: CatzzzLogger
 metadata:
   name: example-catzzzlogger
 spec:
-  message: hello world
-  someValue: 13
+  count: 3
+  asciiCat: |
+      /}_{\           /.-'
+      ( a a )-.___...-'/
+      ==._.==         ;
+           \ i _..._ /,
+           {_;/   {_//

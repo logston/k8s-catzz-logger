@@ -1,6 +1,7 @@
 package main
 
 import (
+	catzzzlogger_v1 "github.com/logston/k8s-catzzz-logger/pkg/apis/catzzzlogger/v1"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -12,26 +13,38 @@ type Handler interface {
 	ObjectUpdated(objOld, objNew interface{})
 }
 
-// TestHandler is a sample implementation of Handler
-type TestHandler struct{}
+// CatzzzLoggerHandler is a sample implementation of Handler
+type CatzzzLoggerHandler struct{}
 
 // Init handles any handler initialization
-func (t *TestHandler) Init() error {
-	log.Info("TestHandler.Init")
+func (t *CatzzzLoggerHandler) Init() error {
+	log.Info("CatzzzLoggerHandler.Init")
 	return nil
 }
 
 // ObjectCreated is called when an object is created
-func (t *TestHandler) ObjectCreated(obj interface{}) {
-	log.Info("TestHandler.ObjectCreated")
+func (t *CatzzzLoggerHandler) ObjectCreated(obj interface{}) {
+	log.Info("CatzzzLoggerHandler.ObjectCreated")
+
+	cl, ok := obj.(*catzzzlogger_v1.CatzzzLogger)
+	if !ok {
+		log.Info("Could not cast object to CatzzzLogger")
+		return
+	}
+
+	max := int(*cl.Spec.Count)
+
+	for i := 0; i < max; i++ {
+		log.Info("\n" + cl.Spec.AsciiCat)
+	}
 }
 
 // ObjectDeleted is called when an object is deleted
-func (t *TestHandler) ObjectDeleted(obj interface{}) {
-	log.Info("TestHandler.ObjectDeleted")
+func (t *CatzzzLoggerHandler) ObjectDeleted(obj interface{}) {
+	log.Info("CatzzzLoggerHandler.ObjectDeleted")
 }
 
 // ObjectUpdated is called when an object is updated
-func (t *TestHandler) ObjectUpdated(objOld, objNew interface{}) {
-	log.Info("TestHandler.ObjectUpdated")
+func (t *CatzzzLoggerHandler) ObjectUpdated(objOld, objNew interface{}) {
+	log.Info("CatzzzLoggerHandler.ObjectUpdated")
 }

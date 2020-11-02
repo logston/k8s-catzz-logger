@@ -33,25 +33,25 @@ func getKubernetesClient() (kubernetes.Interface, catzzzloggerclientset.Interfac
 		log.Fatalf("getClusterConfig: %v", err)
 	}
 
-	myresourceClient, err := catzzzloggerclientset.NewForConfig(config)
+	clClient, err := catzzzloggerclientset.NewForConfig(config)
 	if err != nil {
 		log.Fatalf("getClusterConfig: %v", err)
 	}
 
 	log.Info("Successfully constructed k8s client")
-	return client, myresourceClient
+	return client, clClient
 }
 
 // main code path
 func main() {
 	// get the Kubernetes client for connectivity
-	client, myresourceClient := getKubernetesClient()
+	client, clClient := getKubernetesClient()
 
 	// retrieve our custom resource informer which was generated from
 	// the code generator and pass it the custom resource client, specifying
 	// we should be looking through all namespaces for listing and watching
 	informer := catzzzlogger_v1.NewCatzzzLoggerInformer(
-		myresourceClient,
+		clClient,
 		meta_v1.NamespaceAll,
 		0,
 		cache.Indexers{},
@@ -71,7 +71,7 @@ func main() {
 			// convert the resource object into a key (in this case
 			// we are just doing it in the format of 'namespace/name')
 			key, err := cache.MetaNamespaceKeyFunc(obj)
-			log.Infof("Add myresource: %s", key)
+			log.Infof("Add: %s", key)
 			if err == nil {
 				// add the key to the queue for the handler to get
 				queue.Add(key)
@@ -79,7 +79,7 @@ func main() {
 		},
 		UpdateFunc: func(oldObj, newObj interface{}) {
 			key, err := cache.MetaNamespaceKeyFunc(newObj)
-			log.Infof("Update myresource: %s", key)
+			log.Infof("Update: %s", key)
 			if err == nil {
 				queue.Add(key)
 			}
@@ -91,7 +91,7 @@ func main() {
 			//
 			// this then in turn calls MetaNamespaceKeyFunc
 			key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(obj)
-			log.Infof("Delete myresource: %s", key)
+			log.Infof("Delete: %s", key)
 			if err == nil {
 				queue.Add(key)
 			}
@@ -106,7 +106,7 @@ func main() {
 		clientset: client,
 		informer:  informer,
 		queue:     queue,
-		handler:   &TestHandler{},
+		handler:   &CatzzzLoggerHandler{},
 	}
 
 	// use a channel to synchronize the finalization for a graceful shutdown
