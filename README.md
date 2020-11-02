@@ -41,3 +41,31 @@ The breakpoint should be hit and you can analyze in the debugger the object...
 ```
 ROOT_PACKAGE="github.com/logston/k8s-catzzz-logger" ./generate-groups.sh all "$ROOT_PACKAGE/pkg/client" "$ROOT_PACKAGE/pkg/apis" "catzzzlogger:v1"
 ```
+
+```
+INFO[0114] Controller.runWorker: processing next item   
+INFO[0114] Controller.processNextItem: start            
+INFO[0151] Add myresource: default/example-catzzzlogger 
+INFO[0151] Controller.processNextItem: object created detected: default/example-catzzzlogger 
+INFO[0151] CatzzzLoggerHandler.ObjectCreated            
+INFO[0151] 
+/}_{\           /.-'
+( a a )-.___...-'/
+==._.==         ;
+     \ i _..._ /,
+     {_;/   {_// 
+INFO[0151] 
+/}_{\           /.-'
+( a a )-.___...-'/
+==._.==         ;
+     \ i _..._ /,
+     {_;/   {_// 
+INFO[0151] 
+/}_{\           /.-'
+( a a )-.___...-'/
+==._.==         ;
+     \ i _..._ /,
+     {_;/   {_// 
+INFO[0151] Controller.runWorker: processing next item   
+INFO[0151] Controller.processNextItem: start
+```
